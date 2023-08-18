@@ -4,22 +4,15 @@ mod contract_c;
 
 use wasmer::{imports, Instance, Module, Store, Value};
 
-pub type ExecutionResult<T> = std::result::Result<T, ()>;
-
 fn main() {
+    // Instantiate a default global state
     let mut store = Store::default();
 
-    // Load the compiled WASM bytes for each contract.
-    // let contract_a_code =
-    //     std::fs::read("../target/release/contract_a.wasm").expect("Failed to read contract A wasm");
-    // let contract_b_code =
-    //     std::fs::read("../target/release/contract_b.wasm").expect("Failed to read contract B wasm");
-    // let contract_c_code =
-    //     std::fs::read("../target/release/contract_c.wasm").expect("Failed to read contract C wasm");
-
+    // Set some environment variables
     let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR not set");
     let profile = std::env::var("CARGO_BUILD_PROFILE").unwrap_or_else(|_| "release".to_string());
 
+    // Load the compiled WASM bytes for each contract.
     let contract_a_path = format!("{}/target/{}/contract_a.wasm", manifest_dir, profile);
     let contract_a_code = std::fs::read(&contract_a_path).expect("Failed to read contract A wasm");
 
