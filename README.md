@@ -36,7 +36,7 @@ To ensure that the persistent storage of each contract is updated after their ex
 
 ## C. Limitations
 
-* Manual Compilation: The current design uses a `build.rs`` script to manually compile each contract to WASM. This isn't ideal for larger projects with many contracts.
+* Manual Compilation: The current design uses a `build.rs` script to manually compile each contract to WASM. This isn't ideal for larger projects with many contracts.
 
 * Static Import Structure: The way imports are currently structured is static, i.e., `Contract A` always knows about `Contract B` and `Contract B` knows about `Contract C`. In a dynamic environment, contracts might need a more flexible mechanism to interact with unknown contracts.
 
