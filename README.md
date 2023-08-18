@@ -3,6 +3,7 @@
 ## Task Description
 
 Given:
+
 * Three smart contracts: `Contract A`, `Contract B`, `Contract C`.
 * Each contract has its own on-chain persistent storage.
 * VM which can execute smart contracts on-chain.
