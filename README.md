@@ -66,7 +66,7 @@ cd cross-contract-calls
 3. Run
 
 ```bash
-cargo run --relase
+cargo run --release
 ```
 
 ## Contributing
