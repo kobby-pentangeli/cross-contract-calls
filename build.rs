@@ -17,7 +17,7 @@ fn main() {
         .unwrap();
 
     for contract in &contracts {
-        // Compile the contracts into wasm
+        // Compile the contracts into WASM
         let status = Command::new("rustc")
             .args(&[
                 "--target",
