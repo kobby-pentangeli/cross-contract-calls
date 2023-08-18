@@ -2,6 +2,7 @@ mod contract_a;
 mod contract_b;
 mod contract_c;
 
+use crate::{contract_a::STORAGE_A, contract_b::STORAGE_B, contract_c::STORAGE_C};
 use wasmer::{imports, Instance, Module, Store, Value};
 
 fn main() {
@@ -58,11 +59,41 @@ fn main() {
         .get_function("execute_chained_calls")
         .expect("Function for `Contract A` not found");
 
-    // Execute the function
+    // Note the initial state of each contract's persistent storage
+    unsafe {
+        println!("Initial state of Contract A: {}", STORAGE_A);
+        println!("Initial state of Contract B: {}", STORAGE_B);
+        println!("Initial state of Contract C: {}", STORAGE_C);
+    }
+
+    // Fetch the getter functions
+    let get_storage_a = instance_a
+        .exports
+        .get_function("get_storage_a")
+        .expect("Getter for Contract A not found");
+    let get_storage_b = instance_b
+        .exports
+        .get_function("get_storage_b")
+        .expect("Getter for Contract B not found");
+    let get_storage_c = instance_c
+        .exports
+        .get_function("get_storage_c")
+        .expect("Getter for Contract C not found");
+
+    // Execute the chained calls
     match execute_chained_calls.call(&mut store, &[]) {
         Ok(results) => {
             if let Some(Value::I32(val)) = results.get(0) {
                 println!("Result of chained execution: {}", val);
+
+                // Retrieve and print the updated storage values
+                let updated_a = get_storage_a.call(&mut store, &[]).unwrap()[0].unwrap_i32();
+                let updated_b = get_storage_b.call(&mut store, &[]).unwrap()[0].unwrap_i32();
+                let updated_c = get_storage_c.call(&mut store, &[]).unwrap()[0].unwrap_i32();
+
+                println!("Updated state of Contract A: {}", updated_a);
+                println!("Updated state of Contract B: {}", updated_b);
+                println!("Updated state of Contract C: {}", updated_c);
             } else {
                 println!("Unexpected return type");
             }
