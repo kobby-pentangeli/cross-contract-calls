@@ -5,3 +5,4 @@ authors = ["Kobby Pentangeli <kobbypentangeli@gmail.com>"]
 edition = "2021"
 
 [dependencies]
+wasmer = "4.1.1"
