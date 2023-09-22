@@ -52,22 +52,22 @@ To ensure that the persistent storage of each contract is updated after their ex
 
 1. Add WASM support to your Rust toolchain (if not already set up)
 
-```bash
-rustup target add wasm32-unknown-unknown
-```
+    ```bash
+    rustup target add wasm32-unknown-unknown
+    ```
 
 2. Clone the repository and `cd` into the root
 
-```bash
-git clone https://github.com/kobby-pentangeli/cross-contract-calls.git
-cd cross-contract-calls
-```
+    ```bash
+    git clone https://github.com/kobby-pentangeli/cross-contract-calls.git
+    cd cross-contract-calls
+    ```
 
 3. Run
 
-```bash
-cargo run --release
-```
+    ```bash
+    cargo run --release
+    ```
 
 ## Contributing
 
